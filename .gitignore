@@ -1,0 +1,20 @@
+dist/
+temp/
+materialiconic-github-chrome-extension.zip
+materialiconic-github-firefox-extension.zip
+materialiconic-github-edge-extension.zip
+src/icon-cache.js
+src/icon-map.json
+src/icon-list.json
+src/language-map.json
+svg/
+data/
+
+# Directories/files that may appear in your environment
+node_modules
+*.log
+.idea
+.cache/
+.DS_Store
+.eslintcache
+Thumbs.db

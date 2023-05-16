@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "@nyxb"
+  ],
+  "rules": {
+    "@next/next/no-html-link-for-pages": 0,
+    "unicorn/error-message": 0,
+    "max-statements-per-line": 0
+  },
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "globals": {
+    "chrome": "readonly"
+  },
+  "settings": {
+    "react": {
+      "version": "18"
+    }
+  }
+}

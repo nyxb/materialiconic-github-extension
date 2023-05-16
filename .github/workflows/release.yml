@@ -1,0 +1,87 @@
+name: Release new version
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        description: major|minor|patch - defaults to patch
+        required: true
+        default: patch
+      onlyUpload:
+        description: chrome|firefox|both|not|none  - Only upload to store(s) without bumping version or releasing
+        required: true
+        default: not
+jobs:
+  get-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.13.0
+
+      - name: install dependencies
+        run: npm ci
+
+      - name: build extension
+        if: ${{ github.event.inputs.onlyUpload != 'not' && github.event.inputs.onlyUpload != 'none' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run build
+
+      - name: Attempt update
+        if: ${{ github.event.inputs.onlyUpload == 'not' || github.event.inputs.onlyUpload == 'none' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run release ${{ github.event.inputs.type }}
+
+      - name: Get package version
+        if: ${{ github.event.inputs.onlyUpload == 'not' || github.event.inputs.onlyUpload == 'none' }}
+        id: package-version
+        run: echo ::set-output name=package_version::v$(jq -r .version package.json)
+
+      - name: Commit updated files
+        if: ${{ github.event.inputs.onlyUpload == 'not' || github.event.inputs.onlyUpload == 'none' }}
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: .
+          message: '[auto] release  ${{steps.package-version.outputs.package_version}}'
+          tag: '${{steps.package-version.outputs.package_version}}'
+
+      - name: Release
+        if: ${{ github.event.inputs.onlyUpload == 'not' || github.event.inputs.onlyUpload == 'none' }}
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: '${{steps.package-version.outputs.package_version}}'
+          files: '*.zip'
+
+      - name: Upload to chrome store
+        if: ${{ github.event.inputs.onlyUpload != 'firefox' && github.event.inputs.onlyUpload != 'none' }}
+        continue-on-error: true
+        uses: trmcnvn/chrome-addon@v2
+        with:
+          extension: bggfcpfjbdkhfhfmkjpbhnkhnpjjeomc
+          zip: materialiconic-github-chrome-extension.zip
+          client-id: ${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+
+      - name: Upload to edge store
+        if: ${{ github.event.inputs.onlyUpload != 'edge' && github.event.inputs.onlyUpload != 'none' }}
+        continue-on-error: true
+        uses: wdzeng/edge-addon@v1
+        with:
+          product-id: d7692295-d84f-4bf5-9447-3cbb6ae29517
+          zip-path: materialiconic-github-edge-extension.zip
+          client-id: ${{ secrets.EDGE_CLIENT_ID }}
+          client-secret: ${{ secrets.EDGE_CLIENT_SECRET }}
+          access-token-url: ${{ secrets.EDGE_ACCESS_TOKEN_URL }}
+
+      - name: Upload to firefox store
+        if: ${{ github.event.inputs.onlyUpload != 'chrome' && github.event.inputs.onlyUpload != 'none'}}
+        continue-on-error: true
+        run: npx web-ext sign -s ./dist/firefox/ --channel=listed --api-key=${{ secrets.FIREFOX_API_JWT_ISSUER }} --api-secret=${{ secrets.FIREFOX_API_JWT_SECRET }}

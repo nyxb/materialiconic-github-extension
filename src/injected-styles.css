@@ -1,0 +1,22 @@
+body[data-materialiconic-size='sm'] img[data-materialiconic='icon'] {
+  transform: scale(0.875);
+}
+
+body[data-materialiconic-size='lg'] img[data-materialiconic='icon'] {
+  transform: scale(1.125);
+}
+
+body[data-materialiconic-size='xl'] img[data-materialiconic='icon'] {
+  transform: scale(1.25);
+}
+
+.materialiconic-hide-pseudo::before {
+  display: none !important;
+}
+
+/* Hide folder open/closed icons from new code view tree when clicked by disabling
+   display of those icons when they immediately follow the replaced icon */
+img[data-materialiconic='icon'] + svg.octicon-file-directory-open-fill,
+img[data-materialiconic='icon'] + svg.octicon-file-directory-fill {
+  display: none !important;
+}
