@@ -1,63 +1,70 @@
-<h1 align="center">MaterialIconic for GitHub</h1>
+# 🎩 MaterialIconic for GitHub: Unleash the Magic!
 
-<div align="center">
+![Dark GitHub example][dark-github-example-src]
+![Light GitHub example][light-github-example-src]
 
-![Dark GitHub example](.github/assets/example-dark.png)
-![Light GitHub example](.github/assets/example-light.png)
+[![Chrome Web Store][chrome-web-store-src]][chrome-web-store-href]
+[![Firefox Addons][firefox-addons-src]][firefox-addons-href]
+[![Microsoft Edge Addons][microsoft-edge-addons-src]][microsoft-edge-addons-href]
 
-<p align="center">
-  <a href="https://chrome.google.com/webstore/detail/materialiconic-for-github/bggfcpfjbdkhfhfmkjpbhnkhnpjjeomc"><img src="https://github.com/nyxblabs/materialiconic-github-extension/raw/master/assets/chrome-web-store.png"></a>
-  <a href="https://addons.mozilla.org/en-US/firefox/addon/materialiconic-for-github/"><img src="https://github.com/nyxblabs/materialiconic-github-extension/raw/master/assets/firefox-addons.png"></a>
-</p>
-
-<b>Install directly from the <a href="https://chrome.google.com/webstore/detail/materialiconic-for-github/bggfcpfjbdkhfhfmkjpbhnkhnpjjeomc">Chrome Web Store</a> | <a href="https://microsoftedge.microsoft.com/addons/detail/materialiconic-for-github/khckkdgomkcjjnpgjmdmbceiddlmiolb">Microsoft Edge Addons Store</a> | <a href="https://addons.mozilla.org/en-US/firefox/addon/materialiconic-for-github/">Firefox Addons</a></b></div>
+**Step into the enchanting world of the [Chrome Web Store][chrome-web-store-href] | [Microsoft Edge Addons Store][microsoft-edge-addons-href] | [Firefox Addons][firefox-addons-href]**
 
 ---
 
-<a href="https://github.com/nyxb/materialiconic"><img src="https://img.shields.io/badge/last_built_with_vscode_theme-v4.27.0-blue" /></a>
+[![Last enchanted with VSCode Theme v0.0.6][vscode-theme-src]][vscode-theme-href]
 
-<img valign="middle" src="https://img.shields.io/chrome-web-store/v/bggfcpfjbdkhfhfmkjpbhnkhnpjjeomc?label=Version%20Available%20in%20Chrome%20Store">
+## 📚 The Spellbook
 
-### About
+MaterialIconic for GitHub is a magical browser Extension that transforms the realm of github.com. Say goodbye to mundane file/folder icons and say hello to whimsical material design icons, each uniquely tailored to its file type, tool, and purpose in the project.
 
-MaterialIconic for GitHub is a browser Extension that enhances repositories file browsers when navigating github.com. Replace default file/folder icons with material design icons tailored to each file type, tool and purpose in the project.
+This spell is cast with the aid of the powerful [MaterialIconic Theme][materialiconic-theme-href] extension for Visual Studio Code. All icons and file assignments are conjured directly from this tome, so all praise or design concerns should be directed to the original grimoire.
 
-Based and dependent on the popular [Material Icon Theme](https://github.com/nyxblabs/materialiconic) extension for Visual Studio Code. All icons and file assignments on this project are pulled directly from that project, so any praise or design issues should be raised on the original repository.
+## 🧪 Concoct Your Own Potion
 
-### Build locally
+Before brewing, remember to rename `example.env` to `.env` and whisper in your GitHub token.
 
-```shell
-npm run build
+```bash
+pnpm build
 ```
 
-### Development
+## 🔮 Crystal Ball Gazing (Development)
 
-Build only files from `src` folder, without re-downloading dependencies from [Material Icon Theme](https://github.com/nyxblabs/materialiconic)
+Brew only the elixirs from the `src` folder, without re-summoning the spirits from [MaterialIconic Theme][materialiconic-theme-href]
 
 ```shell
-npm run build-src
+pnpm build-src
 ```
 
-Rebuild extension logos from `src/logo.svg`. Only needed when `src/logo.svg` is changed.
+Re-enchant the extension logos from `src/logo.svg`. Only required when `src/logo.svg` has undergone a metamorphosis.
 
 ```shell
-npm run rebuild-logos
+pnpm rebuild-logos
 ```
 
-Zip `dist` folder for upload to Chrome Web Store and Firefox. _This script needs Zip to be available on PATH_
+Bind the `dist` folder into a scroll for transport to the Chrome Web Store and Firefox. _This script needs the Zip spell to be in your repertoire_
 
 ```shell
-npm run bundle
+pnpm bundle
 ```
 
-Update language-map.json with latest language contributions.
+Speak the incantation to update the language-map.json with the latest linguistic contributions.
 
 ```shell
-npm run build-languages
+pnpm build-languages
 ```
 
 ---
 
-_Special thanks to [@shivapoudel](https://github.com/shivapoudel) for creating and maintaining the Microsoft Edge version of the extension_
+## 📜 Scroll of Binding (License)
 
-_Original extension developed with [Richard Lam](https://github.com/rlam108)_
+[MIT][license-href] - Crafted with 💞 by a team of magical beings.
+
+<!-- Links & Images -->
+[dark-github-example-src]: .github/assets/example-dark.png
+[light-github-example-src]: .github/assets/example-light.png
+[chrome-web-store-src]: https://raw.githubusercontent.com/nyxblabs/materialiconic-github-extension/main/.github/assets/chrome-web-store.png
+[chrome-web-store-href]: https://chrome.google.com/webstore/detail/materialiconic-for-github/fmbmejhdmodclohjakpnidmnehjdcoak
+[firefox-addons-src]: https://raw.githubusercontent.com/nyxblabs/materialiconic-github-extension/main/.github/assets/firefox-addons.png
+[firefox-addons-href]: https://addons.mozilla.org/en-US/firefox/addon/materialiconic-for-github/
+[microsoft-edge-addons-src]: https://raw.githubusercontent.com/nyxblabs/materialiconic-github-extension/main/.github/assets/microsoft-edge-addons.png
+[microsoft-edge-addons-href]: https://microsoftedge.microsoft.com/addons/detail/material
