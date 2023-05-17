@@ -5,6 +5,7 @@ const path = require('node:path')
 const { execSync } = require('node:child_process')
 const fs = require('fs-extra')
 const simpleGit = require('simple-git')
+const consolji = require('consolji')
 
 /**
  * Internal depedencies
@@ -28,7 +29,7 @@ async function main() {
    await fs.remove(destSVGPath)
    await fs.ensureDir(destSVGPath)
 
-   console.log('[1/7] Cloning nyxblabs/materialiconic into temporary cache.')
+   consolji.log('[1/7] Cloning nyxblabs/materialiconic into temporary cache.')
    const git = simpleGit()
    await git.clone('https://github.com/nyxblabs/materialiconic.git', vsExtPath, [
       '--depth',
@@ -36,28 +37,28 @@ async function main() {
    ])
 
    const commit = fs.readFileSync(commitLockPath, { encoding: 'utf8' })?.trim()
-   console.log('Checking out to upstream commit:', commit)
+   consolji.log('Checking out to upstream commit:', commit)
    const upstreamGit = simpleGit(vsExtPath)
    await upstreamGit.checkout(commit, ['--force'])
 
-   console.log('[2/7] Terminate Git repository in temporary cache.')
+   consolji.log('[2/7] Terminate Git repository in temporary cache.')
    await fs.remove(path.resolve(vsExtPath, '.git'))
 
-   console.log('[3/7] Install NPM dependencies for VSC extension.')
-   execSync('npm install --ignore-scripts', vsExtExecOptions)
+   consolji.log('[3/7] Install PNPM dependencies for VSC extension.')
+   execSync('nyxi --ignore-scripts', vsExtExecOptions)
 
-   console.log('[4/7] Terminate Git tracking in temporary cache.')
+   consolji.log('[4/7] Terminate Git tracking in temporary cache.')
    await fs.copy(path.resolve(vsExtPath, 'icons'), path.resolve(destSVGPath))
 
-   console.log('[5/7] Optimise extension icons using SVGO.')
+   consolji.log('[5/7] Optimise extension icons using SVGO.')
    execSync('npx svgo -r .', distIconsExecOptions)
 
-   console.log('[6/7] Run build tasks for VSC extension.')
-   execSync('npm run build', vsExtExecOptions)
+   consolji.log('[6/7] Run build tasks for VSC extension.')
+   execSync('nyxr build', vsExtExecOptions)
 
-   console.log('[7/7] Copy file icon configuration to source code directory.')
+   consolji.log('[7/7] Copy file icon configuration to source code directory.')
    await fs.copy(
-      path.resolve(vsExtPath, 'dist', 'materialiconic.json'),
+      path.resolve(vsExtPath, 'dist', 'material-icons.json'),
       path.resolve(srcPath, 'icon-map.json'),
    )
 

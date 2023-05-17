@@ -4,6 +4,7 @@ const fs = require('fs-extra')
 const fetch = require('node-fetch')
 const stringify = require('json-stable-stringify')
 const iconMap = require('../src/icon-map.json')
+require('dotenv').config()
 
 const vsDataPath = path.resolve(__dirname, '..', 'data')
 const srcPath = path.resolve(__dirname, '..', 'src')

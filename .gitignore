@@ -9,6 +9,7 @@ src/icon-list.json
 src/language-map.json
 svg/
 data/
+.env
 
 # Directories/files that may appear in your environment
 node_modules
@@ -18,3 +19,4 @@ node_modules
 .DS_Store
 .eslintcache
 Thumbs.db
+.parcel-cache/
